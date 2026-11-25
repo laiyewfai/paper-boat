@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Paper Boat</title>
+<style>
+  :root { --ink:#0b1520; --paper:#f4efe3; --amber:#f0a35e; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--ink); overflow:hidden; }
+  body { font-family: ui-serif, "Iowan Old Style", Palatino, Georgia, serif; color:var(--paper); }
+  #stage { position:fixed; inset:0; }
+  canvas { display:block; width:100%; height:100%; }
+
+  /* graded print layer: vignette + a little grain, both pure CSS */
+  #grade {
+    position:fixed; inset:0; pointer-events:none;
+    background:
+      radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 45%, rgba(4,10,18,.55) 100%),
+      linear-gradient(180deg, rgba(10,22,34,.18), rgba(6,12,20,.28));
+    mix-blend-mode: multiply;
+  }
+  #grain {
+    position:fixed; inset:-50%; pointer-events:none; opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+    animation: jitter 1.2s steps(3) infinite;
+  }
+  @keyframes jitter { 0%{transform:translate(0,0)} 33%{transform:translate(-3px,2px)} 66%{transform:translate(2px,-3px)} 100%{transform:translate(0,0)} }
+
+  #title {
+    position:fixed; left:0; right:0; top:38%; text-align:center; pointer-events:none;
+    transition: opacity .9s ease; letter-spacing:.34em; text-transform:uppercase;
+  }
+  #title h1 { margin:0; font-weight:400; font-size:clamp(22px,4.2vw,54px); }
+  #title p { margin:.9em 0 0; font-size:clamp(10px,1.2vw,14px); letter-spacing:.28em; opacity:.72; }
+  #title.gone { opacity:0; }
+
+  #hint {
+    position:fixed; left:50%; bottom:5vh; transform:translateX(-50%);
+    font-size:12px; letter-spacing:.22em; text-transform:uppercase; opacity:0;
+    transition:opacity .6s ease; pointer-events:none; white-space:nowrap;
+  }
+  #hint.show { opacity:.62; }
+
+  #bar { position:fixed; left:0; right:0; bottom:0; height:2px; background:rgba(244,239,227,.12); }
+  #bar i { display:block; height:100%; width:0; background:var(--amber); opacity:.85; }
+
+  body.print #stage { filter: contrast(1.32) saturate(.55) sepia(.12) brightness(1.04); }
+  body.print #grain { opacity:.16; }
+  body.print #grade { background: radial-gradient(110% 80% at 50% 45%, rgba(0,0,0,0) 60%, rgba(8,16,26,.35) 100%); }
+
+  #err {
+    position:fixed; inset:auto 12px 12px 12px; max-height:40vh; overflow:auto;
+    font:12px/1.45 ui-monospace, Menlo, monospace; color:#ffb4a2;
+    background:rgba(0,0,0,.7); padding:10px 12px; display:none; white-space:pre-wrap;
+  }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="grade"></div>
+<div id="grain"></div>
+<div id="title">
+  <h1>The Paper Boat</h1>
+  <p>one sheet, one score, one page</p>
+</div>
+<div id="hint">click to begin &nbsp;·&nbsp; space pause &nbsp;·&nbsp; p print &nbsp;·&nbsp; r restart</div>
+<div id="bar"><i></i></div>
+<div id="err"></div>
+
+<script>
+/* three.js r180, MIT, bundled to a global THREE */
+/*__LIB__*/
+</script>
+
+<script>
+(function () {
+"use strict";
+/*__FILM__*/
+})();
+</script>
+</body>
+</html>
